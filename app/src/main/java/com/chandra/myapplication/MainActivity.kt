@@ -16,7 +16,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             RaamcostaComposeDestinationsDemoTheme {
-               DestinationsNavHost(navGraph = NavGraphs.root)
+                DestinationsNavHost(
+                    navGraph = NavGraphs.root
+                )
             }
         }
     }
