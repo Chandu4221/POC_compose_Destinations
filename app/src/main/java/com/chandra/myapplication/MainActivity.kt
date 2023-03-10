@@ -9,9 +9,13 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.chandra.myapplication.screens.MainScreenViewModel
 import com.chandra.myapplication.screens.NavGraphs
 import com.chandra.myapplication.ui.theme.RaamcostaComposeDestinationsDemoTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +44,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             RaamcostaComposeDestinationsDemoTheme {
                 DestinationsNavHost(
-                    navGraph = NavGraphs.root
+                    navGraph = NavGraphs.root,
+                    dependenciesContainerBuilder = {
+                        dependency(NavGraphs.main){
+                            val parentEntry = remember(navBackStackEntry) {
+                                navController.getBackStackEntry(NavGraphs.main.route)
+                            }
+                            hiltViewModel<MainScreenViewModel>(parentEntry)
+                        }
+                    }
                 )
             }
         }

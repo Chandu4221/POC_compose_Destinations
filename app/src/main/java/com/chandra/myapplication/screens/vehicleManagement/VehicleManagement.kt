@@ -7,17 +7,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.chandra.myapplication.navgraphs.MainNavGraph
+import com.chandra.myapplication.screens.MainScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 
 @Composable
 @MainNavGraph
 @Destination
-fun VehicleManagementScreen() {
+fun VehicleManagementScreen(
+    navigator: DestinationsNavigator,
+    mainScreenViewModel: MainScreenViewModel
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "vehicle Management Screen")
+        Text(text = "vehicle Management Screen ${mainScreenViewModel.sampleValue}")
     }
 }
